@@ -3,7 +3,6 @@ package me.fep310.creativeutils.outcome;
 import me.fep310.creativeutils.CreativeUtils;
 import me.fep310.peticovapi.outcome.CommandOutcome;
 import me.fep310.peticovapi.outcome.OutcomeUtils;
-import me.fep310.peticovapi.outcome.PlayerOutcome;
 import me.fep310.peticovapi.util.PeticovUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,14 +30,17 @@ public class SavePlayerInventory implements CommandOutcome {
             return;
         }
 
-        if (args == null || args[1] == null)
+        if (args == null || args[isPublic ? 2 : 1] == null)
             return;
 
-        String saveName = args[1].toLowerCase(Locale.ROOT);
+        String saveName = args[isPublic ? 2 : 1].toLowerCase(Locale.ROOT);
 
         CreativeUtils.getInstance().getInventoriesDataFile().saveInventory(saveName, player, isPublic);
 
         OutcomeUtils.success(sender, "You successfully saved your inventory.");
-        PeticovUtil.sendMessage(sender, "&e To access it again, use /inventory load "+saveName+".");
+        PeticovUtil.sendMessage(sender,
+                isPublic ?
+                        "&eTo access it again, use /inventory load public "+saveName+"." :
+                        "&eTo access it again, use /inventory load "+saveName+".");
     }
 }

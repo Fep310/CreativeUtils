@@ -31,7 +31,7 @@ public class LoadPlayerInventory implements CommandOutcome, PlayerOutcome {
     @Override
     public void onOutcome(CommandSender sender, @Nullable String[] args) {
 
-        String loadName = args[1].toLowerCase(Locale.ROOT);
+        String loadName = args[isPublic ? 2 : 1].toLowerCase(Locale.ROOT);
 
         InventoriesDataFile invDataFile = CreativeUtils.getInstance().getInventoriesDataFile();
 

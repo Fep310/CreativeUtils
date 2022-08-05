@@ -19,8 +19,16 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
         /inventory load <name>
         /inventory load public <name>
 
-        /inventory list
-        /inventory list public
+        TODO ->
+
+            * List available inventories to load (public or not) ->
+                On PeticovAPI: .addPossibleCompletions() on ArgOptionString
+
+            * /inventory list
+            * /inventory list public
+
+            * /inventory delete
+            * /inventory delete public
     */
 
     public InventoryCmdBlueprint(@NotNull String name) {
@@ -59,7 +67,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                         "Please specify a name for the inventory you're trying to save.",
                         getRightUsage()))
                 .setPermission(getPermission())
-                .setDescription("Save your current inventory")
+                .setDescription("Save your current inventory.")
                 .setNextPossibleArgs("inventory_name");
 
         addArgOptionString(
@@ -77,7 +85,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                         getRightUsage()))
                 .setPrevArgs(savePrev)
                 .setPermission(getPermission())
-                .setDescription("Save your current inventory")
+                .setDescription("Save your current inventory publicly.")
                 .setNextPossibleArgs("inventory_name");
 
         addArgOptionString(
@@ -95,7 +103,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                         "Please specify a name for the inventory you're trying to load.",
                         getRightUsage()))
                 .setPermission(getPermission())
-                .setDescription("Load a saved inventory")
+                .setDescription("Load a saved inventory.")
                 .setNextPossibleArgs("inventory_name");
 
         addArgOptionString(
@@ -112,8 +120,9 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                         OutcomeUtils.showRightUsage(sender,
                                 "Please specify a name for the inventory you're trying to load.",
                                 getRightUsage()))
+                .setPrevArgs(loadPrev)
                 .setPermission(getPermission())
-                .setDescription("Load a saved inventory")
+                .setDescription("Load a public inventory.")
                 .setNextPossibleArgs("inventory_name");
 
         addArgOptionString(
