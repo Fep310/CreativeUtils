@@ -1,0 +1,12 @@
+name: CreativeUtils
+version: '${project.version}'
+main: me.fep310.creativeutils.CreativeUtils
+api-version: 1.19
+depend: [ PeticovAPI ]
+authors: [ Fep310 ]
+description: Utilities for the creative game mode.
+website: github.com/fep310
+commands:
+  inventory:
+    description: Save and load your inventories.
+    usage: /inventory <save/load> <inventory_name>
