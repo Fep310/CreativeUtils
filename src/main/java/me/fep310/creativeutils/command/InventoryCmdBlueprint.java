@@ -1,5 +1,7 @@
 package me.fep310.creativeutils.command;
 
+import me.fep310.creativeutils.CreativeUtils;
+import me.fep310.creativeutils.datafile.InventoriesDataFile;
 import me.fep310.creativeutils.outcome.LoadPlayerInventory;
 import me.fep310.creativeutils.outcome.SavePlayerInventory;
 import me.fep310.creativeutils.gui.CustomGUITest;
@@ -44,6 +46,8 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
             new CustomGUITest().open(player);
             OutcomeUtils.success(player, null);
         });
+
+        InventoriesDataFile inventoriesDataFile = CreativeUtils.getInstance().getInventoriesDataFile();
 
         String[] savePrev = new String[1];
         savePrev[0] = "save";
@@ -109,6 +113,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
         addArgOptionString(
                 1,
                 (sender, args) -> new LoadPlayerInventory(false).onOutcome(sender, args))
+                .addPossibleCompletions((sender) -> inventoriesDataFile.getPrivateInventoryNames((Player) sender))
                 .setPrevArgs(loadPrev)
                 .setPermission(getPermission());
 
@@ -128,6 +133,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
         addArgOptionString(
                 2,
                 (sender, args) -> new LoadPlayerInventory(true).onOutcome(sender, args))
+                .addPossibleCompletions(inventoriesDataFile.getPublicInventoryNames())
                 .setPrevArgs(loadPublicPrev)
                 .setPermission(getPermission());
     }

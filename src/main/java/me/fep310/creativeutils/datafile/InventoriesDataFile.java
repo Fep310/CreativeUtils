@@ -7,13 +7,10 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class InventoriesDataFile extends PluginDataFile {
 
@@ -86,5 +83,32 @@ public class InventoriesDataFile extends PluginDataFile {
         }
 
         return stacksMap;
+    }
+
+    public List<String> getPublicInventoryNames() {
+
+        String publicPath = "public.";
+
+        ConfigurationSection inventoriesSection = configFile.getConfigurationSection(publicPath);
+
+        if (inventoriesSection == null)
+            return List.of();
+
+        return inventoriesSection.getKeys(false).stream().toList();
+    }
+
+    public List<String> getPrivateInventoryNames(Player player) {
+
+        if (player == null)
+            return List.of();
+
+        String path = "private."+player.getUniqueId()+".";
+
+        ConfigurationSection inventoriesSection = configFile.getConfigurationSection(path);
+
+        if (inventoriesSection == null)
+            return List.of();
+
+        return inventoriesSection.getKeys(false).stream().toList();
     }
 }
