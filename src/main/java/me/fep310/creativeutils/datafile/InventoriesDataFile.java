@@ -111,4 +111,14 @@ public class InventoriesDataFile extends PluginDataFile {
 
         return inventoriesSection.getKeys(false).stream().toList();
     }
+
+    public void deletePublicInventory(String name) {
+        configFile.set("public."+name, null);
+        save();
+    }
+
+    public void deletePrivateInventory(Player player, String name) {
+        configFile.set("private."+player.getUniqueId()+"."+name, null);
+        save();
+    }
 }
