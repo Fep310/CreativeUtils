@@ -4,7 +4,7 @@ import me.fep310.creativeutils.CreativeUtils;
 import me.fep310.creativeutils.datafile.InventoriesDataFile;
 import me.fep310.creativeutils.outcome.LoadPlayerInventory;
 import me.fep310.creativeutils.outcome.SavePlayerInventory;
-import me.fep310.creativeutils.gui.CustomGUITest;
+import me.fep310.creativeutils.gui.InventoriesGUI;
 import me.fep310.creativeutils.values.StringValues;
 import me.fep310.peticovapi.commandblueprint.CommandBlueprint;
 import me.fep310.peticovapi.commandblueprint.HelpType;
@@ -56,7 +56,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
 
         setFirstOutcome((sender, args) -> {
             Player player = (Player) sender;
-            new CustomGUITest().open(player);
+            new InventoriesGUI().open(0, player);
             OutcomeUtils.success(player, null);
         });
 
@@ -169,6 +169,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                     List<String> inventories = inventoriesDataFile.getPrivateInventoryNames((Player) sender);
                     String joinedString = String.join(", ", inventories + ".");
 
+                    OutcomeUtils.success(sender, null);
                     PeticovUtil.sendMessage(sender, "&6Your saved inventories:");
                     PeticovUtil.sendMessage(sender,"&e"+joinedString);
 
@@ -185,6 +186,7 @@ public class InventoryCmdBlueprint extends CommandBlueprint {
                     List<String> inventories = inventoriesDataFile.getPublicInventoryNames();
                     String joinedString = String.join(", ", inventories + ".");
 
+                    OutcomeUtils.success(sender, null);
                     PeticovUtil.sendMessage(sender, "&6All publicly saved inventories:");
                     PeticovUtil.sendMessage(sender,"&e"+joinedString);
 

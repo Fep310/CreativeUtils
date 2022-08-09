@@ -7,6 +7,7 @@ import me.fep310.peticovapi.outcome.OutcomeUtils;
 import me.fep310.peticovapi.outcome.PlayerOutcome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.Nullable;
@@ -66,12 +67,15 @@ public class LoadPlayerInventory implements CommandOutcome, PlayerOutcome {
         }
 
         PlayerInventory inventory = player.getInventory();
-
-        inventory.clear();
-        for (Map.Entry<Integer, ItemStack> entry : loadedInventory.entrySet()) {
-            inventory.setItem(entry.getKey(), entry.getValue());
-        }
+        copyToInventory(loadedInventory, inventory);
 
         OutcomeUtils.success(player, "The inventory \""+inventoryName+"\" was successfully loaded.");
+    }
+
+    public static void copyToInventory(Map<Integer, ItemStack> map, Inventory inventory) {
+        inventory.clear();
+        for (Map.Entry<Integer, ItemStack> entry : map.entrySet()) {
+            inventory.setItem(entry.getKey(), entry.getValue());
+        }
     }
 }
